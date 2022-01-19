@@ -1,6 +1,6 @@
 // This file will download all the needed files to perform the runHacking routine.
 // These will only go through the actions of weaken/grow/hacking servers.
-import { BASEURL, SERVER_MAP, } from 'common.js'
+let BASEURL = 'https://raw.githubusercontent.com/bandophahita/bitburner-scripts/master/src/'
 const filesToDownload = [
     'common.js',
     'mainHack.js',
@@ -16,7 +16,7 @@ const filesToDownload = [
     'contract_solver.js',
     'helpers.js',
 ]
-const valuesToRemove = [SERVER_MAP]
+const valuesToRemove = ['BB_SERVER_MAP']
 
 /** @param {NS} ns */
 async function areYouSure(ns) {
