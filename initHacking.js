@@ -12,6 +12,9 @@ const filesToDownload = [
     'killAll.js',
     'runHacking.js',
     'find.js',
+    'stocks.js',
+    'contract_solver.js',
+    'helpers.js',
 ]
 const valuesToRemove = [SERVER_MAP]
 
