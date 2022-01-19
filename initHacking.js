@@ -1,6 +1,6 @@
 // This file will download all the needed files to perform the runHacking routine.
 // These will only go through the actions of weaken/grow/hacking servers.
-let BASEURL = 'https://raw.githubusercontent.com/bandophahita/bitburner-scripts/master/src/'
+let BASEURL = 'https://raw.githubusercontent.com/bandophahita/bitburner-scripts/main/src/'
 const filesToDownload = [
     'common.js',
     'mainHack.js',
