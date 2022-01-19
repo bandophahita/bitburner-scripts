@@ -1,6 +1,6 @@
 // THiS IS MY VERSION OF THE CONTRACT SOLVER
 import { printPathToServer, } from 'find.js'
-import { getItem, } from 'common.js'
+import { getItem, getServerMap} from 'common.js'
 
 /** @param {NS} ns */
 export async function main(ns) {
@@ -15,7 +15,7 @@ export async function solveContracts(ns) {
         ns.tprintf(`${msg}`);
         ns.print(msg);
     }
-    let serverMap = getItem('BB_SERVER_MAP')
+    let serverMap = await getServerMap(ns)
     let servers = Object.keys(serverMap.servers)
     // let servers = getEveryServer(ns);
     
