@@ -11,6 +11,8 @@ const scriptsToKill = [
     'initHacking.js',
     'start.js',
     'find.js',
+    'contract_solver.js',
+    'stocks.js',
 ]
 
 /** @param {NS} ns */
