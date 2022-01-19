@@ -21,8 +21,6 @@ export async function main(ns) {
     if (ns.getHostname() !== 'home') {throw new Exception('Run the script from home')}
     
     let serverMap = await getServerMap(ns)
-    // TODO: REMOVE THIS DEBUG
-    ns.print(JSON.stringify(serverMap, undefined, 0))
     
     for (let i = 0; i < scriptsToKill.length; i++) {
         ns.scriptKill(scriptsToKill[i], 'home')
