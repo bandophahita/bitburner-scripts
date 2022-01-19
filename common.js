@@ -6,7 +6,7 @@ import {
     getFnRunViaNsExec, getFnIsAliveViaNsPs
 } from './helpers.js'
 
-export const BASEURL = 'https://raw.githubusercontent.com/bandophahita/bitburner-scripts/main/src/'
+export const BASEURL = 'https://raw.githubusercontent.com/bandophahita/bitburner-scripts/main/'
 export const hackPrograms = ['BruteSSH.exe', 'FTPCrack.exe', 'relaySMTP.exe', 'HTTPWorm.exe', 'SQLInject.exe']
 export const hackScripts = ['hack.js', 'grow.js', 'weaken.js']
 
