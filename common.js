@@ -110,8 +110,7 @@ export async function getServerMap(ns) {
         if (!serverMap || serverMap.lastUpdate < new Date().getTime() - MAPREFRESHINTERVAL) {
             if (!serverMap) {
                 ns.print("no serverMap found")
-            }
-            if (serverMap.lastUpdate < new Date().getTime() - MAPREFRESHINTERVAL) {
+            } else if (serverMap.lastUpdate < new Date().getTime() - MAPREFRESHINTERVAL) {
                 ns.print("serverMap is old.")
             }
             ns.print(`Spawning spider.js`)
