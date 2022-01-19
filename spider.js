@@ -9,7 +9,7 @@ export async function main(ns) {
     
     if (hostname !== 'home') throw new Exception('Run the script from home')
     
-    const serverMap = { servers: {}, lastUpdate: new Date().getTime() }
+    const serverMap = { servers: { home : {}}, lastUpdate: new Date().getTime() }
     const scanArray = ['home']
     
     while (scanArray.length) {
