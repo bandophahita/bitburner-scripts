@@ -1,5 +1,5 @@
 // This handles buying and upgrading all of the player owned servers.
-import { getItem, setItem, createUUID, SERVER_MAP} from 'common.js'
+import { setItem, createUUID, SERVER_MAP, getServerMap } from 'common.js'
 
 const BUY = 'buy'
 const UPGRADE = 'upgrade'
@@ -20,8 +20,32 @@ function getAvailableMoney(ns){
     return ns.getPlayer().money * settings.totalMoneyAllocation
 }
 
+/**
+ * @typedef {Object} MyServer
+ * @property {string} host
+ * @property {number} ports
+ * @property {number} hackingLevel
+ * @property {number} maxMoney
+ * @property {number} growth
+ * @property {number} minSecurityLevel
+ * @property {number} baseSecurityLevel
+ * @property {number} ram
+ * @property {string[]} connections
+ * @property {string} parent
+ * @property {string[]} children
+ * @property {string[]} files
+ */
 
-/** @param {NS} ns */
+/**
+ * @typedef {Object} ServerMap
+ * @property {Object.<MyServer>} servers
+ * @property {number} lastUpdate
+ */
+
+
+/** @param {NS} ns
+ * @param {ServerMap} serverMap 
+ * @param {string} host */
 function updateServer(ns, serverMap, host) {
     serverMap.servers[host] = {
         host,
@@ -80,12 +104,12 @@ export async function main(ns) {
     while (true) {
         let didChange = false
         
-        const serverMap = getItem(SERVER_MAP)
+        const serverMap = await getServerMap(ns)
         let purchasedServers = getPurchasedServers(ns)
         
         let action = purchasedServers.length < settings.maxPlayerServers ? BUY : UPGRADE
         
-        if (action == BUY) {
+        if (action === BUY) {
             let smallestCurrentServer = purchasedServers.length ? ns.getServerMaxRam(purchasedServers[0]) : 0
             let targetRam = Math.max(settings.minGbRam, smallestCurrentServer)
             

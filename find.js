@@ -66,7 +66,10 @@ export async function main(ns) {
     }
 }
 
-/** @param {NS} ns */
+/** @param {NS} ns
+ * @param {string} host
+ * @param {string} msg
+ */
 async function doFactionServer(ns, host, msg){
     let finalhack = `; hack;`
     let serverMap = await getServerMap(ns)

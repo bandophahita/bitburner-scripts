@@ -96,8 +96,32 @@ export function createUUID() {
 }
 
 
+/**
+ * @typedef {Object} MyServer
+ * @property {string} host
+ * @property {number} ports
+ * @property {number} hackingLevel
+ * @property {number} maxMoney
+ * @property {number} growth
+ * @property {number} minSecurityLevel
+ * @property {number} baseSecurityLevel
+ * @property {number} ram
+ * @property {string[]} connections
+ * @property {string} parent
+ * @property {string[]} children
+ * @property {string[]} files
+ */
+
+/**
+ * @typedef {Object} ServerMap
+ * @property {Object.<MyServer>} servers
+ * @property {number} lastUpdate
+ */
+
+
 // SHOULD NOT BE IN COMMON. COULD CAUSE CIRCULAR IMPORTS WITH SPIDER
-/** @param {NS} ns */
+/** @param {NS} ns 
+ * @returns {Promise<ServerMap>} */
 export async function getServerMap(ns) {
     // used to fetch the servermap 
     let spider_loop_count = 0;
@@ -105,6 +129,7 @@ export async function getServerMap(ns) {
         if (spider_loop_count > SPIDER_RETRY_LIMIT) {
             throw new Exception(`Exceeded ${SPIDER_RETRY_LIMIT} retries to update serverMap`)
         }
+        /** @type {ServerMap} */
         let serverMap = getItem(SERVER_MAP)
         // if serverMap is empty or old, refresh it
         if (!serverMap || serverMap.lastUpdate < new Date().getTime() - MAPREFRESHINTERVAL) {
