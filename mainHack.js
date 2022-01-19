@@ -43,7 +43,7 @@ function weakenCyclesForHack(hackCycles) {
 /**
  * @param {NS} ns
  * @param {Object} servers
- * @returns {Array<string>}
+ * @returns {Promise<string[]>}
  */
 async function getHackableServers(ns, servers) {
     const playerDetails = getPlayerDetails(ns)

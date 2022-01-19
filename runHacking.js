@@ -39,7 +39,9 @@ export async function main(ns) {
     }
 }
 
-/** @param {NS} ns */
+/** @param {NS} ns
+ * @param {number | string} fn
+ */
 function runIfNotRunning(ns, fn) {
     if (!ns.isRunning(fn)) {
         ns.tprint(`Spawning ${fn}`)
@@ -47,7 +49,9 @@ function runIfNotRunning(ns, fn) {
     }
 }
 
-/** @param {NS} ns */
+/** @param {NS} ns
+ * @param {number | string} fn
+ */
 async function runAsBlocker(ns, fn) {
     // will run a script but is a blocking operation.
     runIfNotRunning(ns, fn)
