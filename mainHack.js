@@ -1,4 +1,4 @@
-import { localeHHMMSS, getPlayerDetails, hackPrograms, hackScripts, createUUID, convertMSToHHMMSS,
+import { localeHHMMSS, getPlayerDetails, hackScripts, createUUID, convertMSToHHMMSS,
     getServerMap,
 } from 'common.js'
 
@@ -24,6 +24,22 @@ const SPIDER_TIMEOUT = 1000 * 60 // 60 seconds
 const SPIDER_RETRY_LIMIT = 5;
 
 
+/**
+ * @typedef {Object} MyServer
+ * @property {string} host
+ * @property {number} ports
+ * @property {number} hackingLevel
+ * @property {number} maxMoney
+ * @property {number} growth
+ * @property {number} minSecurityLevel
+ * @property {number} baseSecurityLevel
+ * @property {number} ram
+ * @property {string[]} connections
+ * @property {string} parent
+ * @property {string[]} children
+ * @property {string[]} files
+ */
+
 // ------------------------------------------------------------------------------------------------
 /**
  * @param {number} growCycles
@@ -42,7 +58,7 @@ function weakenCyclesForHack(hackCycles) {
 // ------------------------------------------------------------------------------------------------
 /**
  * @param {NS} ns
- * @param {Object} servers
+ * @param {Object.<MyServer>} servers
  * @returns {Promise<string[]>}
  */
 async function getHackableServers(ns, servers) {
@@ -80,7 +96,7 @@ async function getHackableServers(ns, servers) {
 /**
  * @param {NS} ns
  * @param {Array<string>} serversList
- * @param {Object} servers
+ * @param {Object.<MyServer>} servers
  * @param {Object} serverExtraData
  * @returns {Array<string>}
  */
@@ -134,33 +150,9 @@ export async function main(ns) {
     
     if (ns.getHostname() !== 'home') {throw new Exception('Run the script from home')}
     
-    // let spider_loop_count = 0;
     while (true) {
-        // if (spider_loop_count > SPIDER_RETRY_LIMIT) {
-        //     throw new Exception(`Exceeded ${SPIDER_RETRY_LIMIT} retries to update serverMap`)
-        // }
-        
-        // having a complete servermap is vital to the loop, we need to wait for it to finish.
-        // this might be redundant now.
-        // let now = new Date().getTime();
-        // while (ns.isRunning('spider.js')) {
-        //     if (new Date().getTime() - now > SPIDER_TIMEOUT) {
-        //         throw new Exception(`detected spider.js still running after ${SPIDER_TIMEOUT} seconds`)
-        //     }
-        //     await ns.sleep(1000)
-        // }
         const serverExtraData = {}
-        // const serverMap = getItem(SERVER_MAP)
         const serverMap = await getServerMap(ns)
-        
-        // if (!serverMap || serverMap.lastUpdate < new Date().getTime() - settings.mapRefreshInterval) {
-        //     ns.tprint(`Spawning spider.js`)
-        //     await ns.run('spider.js')
-        //     spider_loop_count++
-        //     continue;
-        // }
-        // spider_loop_count = 0
-        
         
         // TODO: detect if home ram was upgraded. 
         if (serverMap.servers.home.ram >= settings.homeRamBigMode) {
@@ -331,15 +323,4 @@ export async function main(ns) {
         
         await ns.sleep(weakenTime + 300)
     }
-}
-
-/** @param {NS} ns */
-async function runAsBlocker(ns, fn) {
-    // will run a script but is a blocking operation.
-    runIfNotRunning(ns, fn)
-    await ns.sleep(50);
-    while (ns.isRunning(fn)) {
-        await ns.sleep(50);
-    }
-    ns.tprint(`${fn} all done `)
 }
