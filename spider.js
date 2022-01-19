@@ -109,7 +109,7 @@ export async function main(ns) {
     
     setItem(SERVER_MAP, serverMap)
     ns.tprint(`spider.js FINISHED!`)
-    if (ns.args[0] == '-v') {
+    if (ns.args[0] === '-v') {
         ns.tprint(JSON.stringify(serverMap, undefined, 2))
     }
     

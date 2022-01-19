@@ -1,6 +1,6 @@
 // THiS IS MY VERSION OF THE CONTRACT SOLVER
 import { printPathToServer, } from 'find.js'
-import { getItem, getServerMap} from 'common.js'
+import { getServerMap} from 'common.js'
 
 /** @param {NS} ns */
 export async function main(ns) {
@@ -21,7 +21,7 @@ export async function solveContracts(ns) {
     
     for (let server of servers) {
         // if we dont have access to the TOR router, skip looping at darkweb as we wont have access.
-        if (server == 'darkweb' && !ns.getPlayer().tor) { continue }
+        if (server === 'darkweb' && !ns.getPlayer().tor) { continue }
         
         let files = ns.ls(server, ".cct");
         if (!files.length) { continue }
@@ -114,21 +114,6 @@ export async function solveContracts(ns) {
 }
 
 
-/** @param {NS} ns */
-// function getEveryServer(ns, rootHost = 'home') {
-//     ns.disableLog('sleep');
-//     ns.disableLog('scan')
-//     let pendingScan = [rootHost]
-//     const servers = []
-//     while (pendingScan.length) {
-//         const hostname = pendingScan.shift()
-//         servers.push(hostname)
-//         pendingScan.push(...ns.scan(hostname))
-//         pendingScan = pendingScan.filter(host => !servers.includes(host))
-//     }
-//     return [...servers]
-// }
-
 // function arraysEqual(a, b) {
 //     if (a === b) return true; if (a == null || b == null) return false; if (a.length !== b.length) return false;
 //     for (var i = 0; i < a.length; ++i) { if (a[i] !== b[i]) return false; }
@@ -137,7 +122,8 @@ export async function solveContracts(ns) {
 
 
 // --------------------------------------------------------------------------
-/** @param {NS} ns */
+/** @param {NS} ns
+ * @param arrayData */
 async function solverArrayJumpingGame(ns, arrayData) {
     await ns.sleep(50);
     ns.print("solverArrayJumpingGame()");
@@ -153,6 +139,8 @@ async function solverArrayJumpingGame(ns, arrayData) {
     return 0 + Boolean(arrayJump[arrayData.length - 1]); // thanks /u/Kalumniatoris
 }
 
+/** @param {NS} ns
+ * @param arrayData */
 async function solverGenerateIPs(ns, arrayData) {
     ns.print("solverGenerateIPs()");
     await ns.sleep(50);
@@ -197,6 +185,8 @@ async function solverGenerateIPs(ns, arrayData) {
     return tempStr.replace(/\"/g, '');
 }
 
+/** @param {NS} ns
+ * @param arrayData */
 async function solverLargestPrime(ns, arrayData) {
     ns.print("solverLargestPrime()");
     await ns.sleep(50);
@@ -215,6 +205,8 @@ async function solverLargestPrime(ns, arrayData) {
     return arrayData;
 }
 
+/** @param {NS} ns
+ * @param arrayData */
 async function solverLargestSubset(ns, arrayData) {
     ns.print("solverLargestSubset()");
     await ns.sleep(50);
@@ -237,11 +229,13 @@ async function solverLargestSubset(ns, arrayData) {
     return highestSubset;
 }
 
+/** @param {NS} ns
+ * @param arrayData */
 async function solverMergeRanges(ns, arrayData) {
     ns.print("solverMergeRanges()");
     await ns.sleep(50);
     
-    let i, j, k;
+    let i, j;
     let rangeMax = 0;
     let rangeMin = 999;
     let outputRanges = [];
@@ -252,7 +246,8 @@ async function solverMergeRanges(ns, arrayData) {
     }
     
     let activeRange = 0;
-    let startRange, inRange;
+    let startRange = -9999;
+    let inRange;
     
     for (i = rangeMin; i <= rangeMax + 1; i++) {
         inRange = 0;
@@ -277,6 +272,8 @@ async function solverMergeRanges(ns, arrayData) {
     return JSON.stringify(outputRanges);
 }
 
+/** @param {NS} ns
+ * @param arrayData */
 async function solverSpiralizeMatrix(ns, arrayData) {
     ns.print("solverSpiralizeMatrix()");
     await ns.sleep(50);
@@ -331,6 +328,8 @@ async function solverSpiralizeMatrix(ns, arrayData) {
     return JSON.stringify(resultData);
 }
 
+/** @param {NS} ns
+ * @param arrayData */
 async function solverStockTrader(ns, arrayData) {
     ns.print("solverStockTrader()");
     await ns.sleep(50);
@@ -370,6 +369,8 @@ async function solverStockTrader(ns, arrayData) {
     return highestProfit[arrayData[0] - 1][arrayData[1].length - 1];
 }
 
+/** @param {NS} ns
+ * @param arrayData */
 async function solverTrianglePath(ns, arrayData) {
     ns.print("solverTrianglePath()");
     await ns.sleep(50);
@@ -390,6 +391,8 @@ async function solverTrianglePath(ns, arrayData) {
     return finalMinimum;
 }
 
+/** @param {NS} ns
+ * @param arrayData */
 async function solverUniquePaths(ns, arrayData) {
     ns.print("solverUniquePaths()");
     await ns.sleep(50);
@@ -424,10 +427,12 @@ async function solverUniquePaths(ns, arrayData) {
     return (factN / factAK);
 }
 
+/** @param {NS} ns
+ * @param arrayData */
 async function solverUniquePathsII(ns, arrayData) {
     ns.print("solverUniquePathsII()");
     await ns.sleep(50);
-    let i, j, k;
+    let i, j;
     let pathsTo = [];
     for (i = 0; i < arrayData.length; i++) {
         pathsTo[i] = [];
@@ -456,10 +461,12 @@ async function solverUniquePathsII(ns, arrayData) {
     return pathsTo[pathsTo.length - 1][pathsTo[0].length - 1];
 }
 
+/** @param {NS} ns
+ * @param arrayData */
 async function solverWaysToExpress(ns, arrayData) {
     ns.print("solverWaysToExpress()");
     await ns.sleep(50);
-    let i, j, k;
+    let i, j;
     
     let operatorList = ["", "+", "-", "*"];
     let validExpressions = [];
@@ -516,6 +523,8 @@ async function solverWaysToExpress(ns, arrayData) {
     return JSON.stringify(validExpressions);
 }
 
+/** @param {NS} ns
+ * @param arrayData */
 async function solverWaysToSum(ns, arrayData) {
     ns.print("solverWaysToSum()");
     await ns.sleep(50);
@@ -525,7 +534,8 @@ async function solverWaysToSum(ns, arrayData) {
 }
 
 // ----------------
-/** @param {NS} ns */
+/** @param {NS} ns
+ * @param data */
 async function sanitizeParentheses(ns, data) {
     ns.print("sanitizeParentheses()");
     var solutions = new Set();
@@ -534,32 +544,32 @@ async function sanitizeParentheses(ns, data) {
     var checkValidity = (str) => {
         var nestLevel = 0;
         for (var c of str) {
-            if (c == "(") nestLevel++;
-            else if (c == ")") nestLevel--;
+            if (c === "(") nestLevel++;
+            else if (c === ")") nestLevel--;
             if (nestLevel < 0) return false;
         }
         
-        if (nestLevel == 0) solutions.add(str);
-        return nestLevel == 0;
+        if (nestLevel === 0) solutions.add(str);
+        return nestLevel === 0;
     };
     
     // Does a breadth first search to check all nodes at the target depth
     var getNodesAtDepth = (str, targetDepth, curDepth = 0) => {
-        if (curDepth == targetDepth)
+        if (curDepth === targetDepth)
             checkValidity(str);
         else
             for (var i = 0; i < str.length; i++)
-                if (str[i] == "(" || str[i] == ")")
+                if (str[i] === "(" || str[i] === ")")
                     getNodesAtDepth(str.slice(0, i) + str.slice(i + 1), targetDepth, curDepth + 1);
     }
     
     // Start from the top level and expand down until we find at least one solution
     var targetDepth = 0;
-    while (solutions.size == 0 && targetDepth < data.length - 1) {
+    while (solutions.size === 0 && targetDepth < data.length - 1) {
         getNodesAtDepth(data, targetDepth++);
     }
     
     // If no solutions were found, return [""]
-    if (solutions.size == 0) solutions.add("");
+    if (solutions.size === 0) solutions.add("");
     return `[${[...solutions].join(", ")}]`;
 }
