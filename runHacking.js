@@ -15,14 +15,14 @@ export async function main(ns) {
     }
     const homeRam = ns.getServerMaxRam('home')
     
+    ns.tprint(`Spawning spider.js`)
+    await runAsBlocker(ns, 'spider.js')
+    
     await runIfNotRunning(ns, 'reminders.js')
     
     if (homeRam >= 32) {
         await runIfNotRunning(ns, 'hacknet_buyer.js')
         await runIfNotRunning(ns, 'stocks.js')
-        
-        ns.tprint(`Running spider.js`)
-        await runAsBlocker(ns, 'spider.js')
         
         ns.tprint(`Spawning playerServers.js`)
         ns.run('playerServers.js')
