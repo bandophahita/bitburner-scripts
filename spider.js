@@ -7,7 +7,7 @@ export async function main(ns) {
     ns.tprint(`Starting spider.js`)
     let hostname = ns.getHostname()
     
-    if (hostname !== 'home') throw new Exception('Run the script from home')
+    if (hostname !== 'home') throw new Error('Run the script from home')
     
     const serverMap = { servers: { home : {}}, lastUpdate: new Date().getTime() }
     const scanArray = ['home']

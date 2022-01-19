@@ -13,7 +13,7 @@ export async function main(ns) {
     ns.disableLog('getHackingLevel')
     ns.print(`-`.repeat(80))
     let hostname = ns.getHostname()
-    if (hostname !== 'home') { throw new Exception('Run the script from home') }
+    if (hostname !== 'home') { throw new Error('Run the script from home') }
     await hackAllServers(ns)
 }
 
@@ -73,7 +73,7 @@ async function hackAllServers(ns) {
 async function canBeHacked(ns, host) {
     let serverMap = await getServerMap(ns);
     let server = serverMap.servers[host];
-    if (!ns.serverExists(host)) throw new Exception(`unknown server: ${host}`)
+    if (!ns.serverExists(host)) throw new Error(`unknown server: ${host}`)
     const playerDetails = getPlayerDetails(ns)
     let portsHackable = server.ports <= playerDetails.portHacks;
     let haveSkill = server.hackingLevel <= playerDetails.hackingLevel

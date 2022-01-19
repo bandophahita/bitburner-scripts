@@ -14,7 +14,7 @@ export async function main(ns) {
     ns.disableLog("sleep");
     
     let hostname = ns.getHostname()
-    if (hostname !== 'home') throw new Exception('Run the script from home')
+    if (hostname !== 'home') throw new Error('Run the script from home')
     
     while (true) {
         await checkDarkWeb(ns);

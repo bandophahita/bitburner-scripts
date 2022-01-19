@@ -126,7 +126,7 @@ export async function getServerMap(ns) {
     let spider_loop_count = 0;
     while (true) {
         if (spider_loop_count > SPIDER_RETRY_LIMIT) {
-            throw new Exception(`Exceeded ${SPIDER_RETRY_LIMIT} retries to update serverMap`)
+            throw new Error(`Exceeded ${SPIDER_RETRY_LIMIT} retries to update serverMap`)
         }
         /** @type {ServerMap} */
         let serverMap = getItem(SERVER_MAP)

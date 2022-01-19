@@ -20,7 +20,7 @@ export async function main(ns) {
     ns.tprint(`Starting killAll.js`)
     const scriptToRunAfter = ns.args[0]
     
-    if (ns.getHostname() !== 'home') {throw new Exception('Run the script from home')}
+    if (ns.getHostname() !== 'home') {throw new Error('Run the script from home')}
     
     let serverMap = await getServerMap(ns)
     

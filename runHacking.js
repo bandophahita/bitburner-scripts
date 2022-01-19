@@ -11,7 +11,7 @@ export async function main(ns) {
     let targetName = ns.args[0] || ""
     let hostname = ns.getHostname()
     if (hostname !== 'home') {
-        throw new Exception('Run the script from home')
+        throw new Error('Run the script from home')
     }
     const homeRam = ns.getServerMaxRam('home')
     

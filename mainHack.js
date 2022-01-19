@@ -148,7 +148,7 @@ export async function main(ns) {
     let targetNameManual = ns.args[0]
     let targetName
     
-    if (ns.getHostname() !== 'home') {throw new Exception('Run the script from home')}
+    if (ns.getHostname() !== 'home') {throw new Error('Run the script from home')}
     
     while (true) {
         const serverExtraData = {}

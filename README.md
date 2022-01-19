@@ -22,7 +22,7 @@ in the console).
 ```javascript
 export async function main(ns) {
   if (ns.getHostname() !== "home") {
-    throw new Exception("Run the script from home");
+    throw new Error("Run the script from home");
   }
 
   await ns.wget(
